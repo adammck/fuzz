@@ -2,7 +2,7 @@
 # vim: noet
 
 module Fuzz::Token
-	class Number < Base
+	class Numbers < Base
 		Pattern = '\d+'
 		
 		# convert captured digits

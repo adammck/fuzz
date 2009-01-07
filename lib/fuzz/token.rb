@@ -78,10 +78,23 @@ module Fuzz
 				pat = "(" + pat + ")"\
 					unless pat.index "("
 
-				# return the patten wedged between delimiters,
+				# build the patten wedged between delimiters,
 				# to avoid matching within other token bodies
 				del = "(" + Fuzz::Delimiter + ")"
-				Regexp.new(del + pat + del)
+				
+				
+				rx = del + pat + del
+				
+				# if this token must be the first or last in a string
+				# (to aid loose tokens like Letters or Numbers),  patch
+				# the regex. we leave the delimiters, to catch any
+				# leading or trailing junk characters
+				rx = '\A' + rx if @options[:first]
+				rx = rx +'\Z'  if @options[:last]
+					
+				# return a regex object to match
+				# incoming strings against
+				Regexp.new(rx)
 			end
 
 

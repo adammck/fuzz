@@ -47,6 +47,34 @@ describe Fuzz::Token::Base do
 		m.class.should == Fuzz::Match
 	end
 	
+	it "allows tokens to be marked as :first" do
+		
+		# create a temporary token
+		fc = Class.new(Fuzz::Token::Base)
+		fc.const_set(:Pattern, '[a-z]+')
+		f = fc.new "Letters", :first => true
+		
+		# test a matching (with and without
+		# leading junk) and non-matching string
+		f.match("abc 123").value.should == "abc"
+		f.match(" ,;abc 123").value.should == "abc"
+		f.match("123 abc").should == nil
+	end
+	
+	it "allows tokens to be marked as :last" do
+		
+		# create a temporary token
+		fc = Class.new(Fuzz::Token::Base)
+		fc.const_set(:Pattern, '[a-z]+')
+		f = fc.new "Letters", :last => true
+		
+		# test a matching (with and without
+		# trailing junk) and non-matching string
+		f.match("123 abc").value.should == "abc"
+		f.match("123 abc;, ").value.should == "abc"
+		f.match("abc 123").should == nil
+	end
+	
 	
 	describe "(extract)" do
 		before(:each) do

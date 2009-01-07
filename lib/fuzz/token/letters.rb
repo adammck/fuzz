@@ -3,6 +3,9 @@
 
 module Fuzz::Token
 	class Letters < Base
-		Pattern = "[a-z]+"
+		Pattern = '[a-z]+'
+		
+		Examples = {
+			"blah" => "blah" }
 	end
 end

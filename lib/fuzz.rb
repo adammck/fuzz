@@ -23,6 +23,16 @@ require "#{dir}/fuzz/match.rb"
 require "#{dir}/fuzz/parser.rb"
 require "#{dir}/fuzz/errors.rb"
 
+# some base token classes
+require "#{dir}/fuzz/token/letters.rb"
+require "#{dir}/fuzz/token/numbers.rb"
+
 # and some common token classes
 require "#{dir}/fuzz/token/gender.rb"
+require "#{dir}/fuzz/token/phone.rb"
 require "#{dir}/fuzz/token/age.rb"
+require "#{dir}/fuzz/token/length.rb"
+require "#{dir}/fuzz/token/height.rb"
+require "#{dir}/fuzz/token/ratio.rb"
+require "#{dir}/fuzz/token/weight.rb"
+

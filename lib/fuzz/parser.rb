@@ -65,14 +65,34 @@ module Fuzz
 		#   p.add_token "age", :age
 		#
 		#   p.parse("13 year old")
-		#   p.remainder => []
+		#   p.unparsed => []
 		#
 		#   p.parse("13 blah blah")
-		#   p.remainder => ["blah blah"]
+		#   p.unparsed => ["blah blah"]
+		#
+		#   p.parse("blah 13 y/o blah")
+		#   p.unparsed => ["blah", "blah"]
 		#
 		def unparsed
 			raise_unless_parsed
 			@unparsed_str.split(Fuzz::Replacement)
+		end
+		
+		# Returns the value of the parsed token of
+		# the name _token_name_, or nil if no such
+		# token exists. Raises NotParsedYet if no
+		# string has been parsed yet.
+		def [](token_name)
+			raise_unless_parsed
+			@matches.each do |mat|
+				if mat.token.name == token_name
+					return mat.value
+				end
+			end
+			
+			# no token returned
+			# yet = NO TOKEN FOUND
+			nil
 		end
 
 		private
