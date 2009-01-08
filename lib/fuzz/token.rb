@@ -82,7 +82,8 @@ module Fuzz
 				# to avoid matching within other token bodies
 				del = "(" + Fuzz::Delimiter + ")"
 				
-				
+				# wrap the pattern in delimiters,
+				# to avoid matching within fields
 				rx = del + pat + del
 				
 				# if this token must be the first or last in a string
@@ -109,7 +110,13 @@ module Fuzz
 				# wrap the return value in Fuzz::Match, to
 				# provide much more useful access than the
 				# raw MatchData from the regex
-				Fuzz::Match.new(self, md)
+				fm = Fuzz::Match.new(self, md)
+				
+				# before returning, validate the match,
+				# to give the token the opportunity to
+				# reject it based on more semantic
+				# constraints (number range, etc)
+				accept?(fm) ? fm : nil
 			end
 			
 			
@@ -139,6 +146,28 @@ module Fuzz
 				# the receiver to deal with. tokens doing
 				# this should probably overload this method.
 				else; return captures; end
+			end
+			
+			
+			# Returns the "humaized" version of the same values
+			# accepted by the _normalize_ method, for a friendlier
+			# way to present the value to users.
+			#
+			# As default, this method just calls _to_s_ on the
+			# output of the _normalize_ method, but should be
+			# overridden by most tokens.
+			def humanize(*captures)
+				normalize(*captures).to_s
+			end
+			
+			
+			# Returns a boolean value which indicates whether the
+			# Fuzz::Match object given is acceptable. This allows
+			# subclasses to impose stricter rules on matches, such
+			# as checking a username exists, matching numbers only
+			# within a predefined range, etc.
+			def accept?(fuzz_match)
+				true
 			end
 
 

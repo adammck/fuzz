@@ -41,8 +41,12 @@ module Fuzz
 			# probably because the method was expecting a different
 			# number of captures, which indicates a broken regex
 			rescue ArgumentError => err
-				raise ArgumentError.new("Normalize failed for #{cap.inspect} via #{token.inspect}")
+				raise ArgumentError.new("Normalize failed for #{@captures.inspect} via #{token.inspect}")
 			end
+		end
+		
+		def humanize
+			token.humanize(value)
 		end
 	end
 end
