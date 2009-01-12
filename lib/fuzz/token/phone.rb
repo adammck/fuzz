@@ -7,7 +7,7 @@ module Fuzz::Token
 		# by digits, dashes, and spaces
 		Pattern = '([\+0][\d\s\-]+)'
 		
-		# strip out any useless punchuation, but
+		# strip out any useless punctuation, but
 		# leave it as a string (phone numbers are
 		# not just big integers)
 		def normalize(phone_str)
