@@ -7,8 +7,8 @@ module Fuzz::Token
 
 		# convert captured digits
 		# into a float object
-		def normalize(length_str)
-			length_str.to_f
+		def normalize(length_str, decimal_str=nil)
+			decimal_str.nil? ? length_str.to_f : (length_str + decimal_str).to_f
 		end
 		
 		def humanize(length_f)

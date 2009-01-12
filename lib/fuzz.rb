@@ -11,7 +11,7 @@ module Fuzz
 
 	# The regex chunk which is considered a valid
 	# delimiter between tokens in a form submission.
-	Delimiter = '\A|[\s;,]+|' + Replacement + '|\Z'
+	Delimiter = '\A|[\s;,\*]+|' + Replacement + '|\Z'
 
 end
 
