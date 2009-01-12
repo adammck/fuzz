@@ -71,7 +71,7 @@ module Fuzz
 				pat = self.class.const_get(:Pattern)
 
 				# If the pattern contains no captures, wrap
-				# it in parenthesis to captures the whole
+				# it in parenthesis to capture the whole
 				# thing. This is vanity, so we can omit
 				# the parenthesis from the Patterns of
 				# simple Token subclasses.

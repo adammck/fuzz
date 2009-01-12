@@ -5,7 +5,7 @@ module Fuzz
 
 	# The character inserted in place of a Token
 	# when it is plucked out of a string (to prevent
-	# the surrounding text from beind considered a
+	# the surrounding text from being considered a
 	# single token, when it is clearly not)
 	Replacement = 0.chr
 
@@ -33,6 +33,6 @@ require "#{dir}/fuzz/token/phone.rb"
 require "#{dir}/fuzz/token/age.rb"
 require "#{dir}/fuzz/token/length.rb"
 require "#{dir}/fuzz/token/height.rb"
-require "#{dir}/fuzz/token/ratio.rb"
+require "#{dir}/fuzz/token/boolean.rb"
 require "#{dir}/fuzz/token/weight.rb"
 

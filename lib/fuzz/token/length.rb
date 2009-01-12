@@ -3,6 +3,16 @@
 
 module Fuzz::Token
 	class Length < Base
-		Pattern = '(\d+)(?:\s*(?:centimeters?|cm))?'
+		Pattern = '(\d+)(\.\d+)?(?:\s*(?:centimeters?|cm))?'
+
+		# convert captured digits
+		# into a float object
+		def normalize(length_str)
+			length_str.to_f
+		end
+		
+		def humanize(length_f)
+			length_f.to_s + "cm"
+		end
 	end
 end

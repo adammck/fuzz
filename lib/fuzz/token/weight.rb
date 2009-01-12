@@ -5,16 +5,20 @@ module Fuzz::Token
 	class Weight < Base
 		
 		Prefix = '(?:weighing?\s*)?'
-		Meat   = '(\d+)'
+		Meat   = '(\d+)(\.\d+)?'
 		Suffix = '(?:\s*(?:kilogram?|kilogrammes?|kg))?'
 		
 		# create one big ugly regex
 		Pattern = Prefix + Meat + Suffix
 		
 		# convert captured digits
-		# into a fixnum object
+		# into a float object
 		def normalize(weight_str)
-			weight_str.to_i
+			weight_str.to_f
+		end
+
+		def humanize(weight_f)
+			weight_f.to_s + "kg"
 		end
 	end
 end
