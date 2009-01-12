@@ -95,7 +95,7 @@ module Fuzz
 					
 				# return a regex object to match
 				# incoming strings against
-				Regexp.new(rx)
+				Regexp.new(rx, Regexp::IGNORECASE)
 			end
 
 
@@ -149,15 +149,15 @@ module Fuzz
 			end
 			
 			
-			# Returns the "humaized" version of the same values
-			# accepted by the _normalize_ method, for a friendlier
+			# Returns the "humaized" version of the same value
+			# output by the _normalize_ method, for a friendlier
 			# way to present the value to users.
 			#
 			# As default, this method just calls _to_s_ on the
 			# output of the _normalize_ method, but should be
 			# overridden by most tokens.
-			def humanize(*captures)
-				normalize(*captures).to_s
+			def humanize(normalized)
+				normalized.to_s
 			end
 			
 			

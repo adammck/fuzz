@@ -10,7 +10,7 @@ module Fuzz::Token
 		# whatever variation of gender was
 		# matched, return a regular symbol
 		def normalize(gender_str)
-			Male.include?(gender_str) ? (:male) : (:female)
+			Male.include?(gender_str.downcase) ? (:male) : (:female)
 		end
 		
 		Examples = {
