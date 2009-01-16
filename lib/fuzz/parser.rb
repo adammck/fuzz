@@ -78,7 +78,7 @@ module Fuzz
 			@unparsed_str.split(Fuzz::Replacement)
 		end
 		
-		# Returns the value of the parsed token of
+		# Returns the match of the parsed token of
 		# the name _token_name_, or nil if no such
 		# token exists. Raises NotParsedYet if no
 		# string has been parsed yet.
@@ -86,7 +86,7 @@ module Fuzz
 			raise_unless_parsed
 			@matches.each do |mat|
 				if mat.token.name == token_name
-					return mat.value
+					return mat
 				end
 			end
 			

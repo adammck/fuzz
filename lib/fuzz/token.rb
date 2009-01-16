@@ -149,7 +149,7 @@ module Fuzz
 			end
 			
 			
-			# Returns the "humaized" version of the same value
+			# Returns the "humanized" version of the same value
 			# output by the _normalize_ method, for a friendlier
 			# way to present the value to users.
 			#
