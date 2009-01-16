@@ -32,6 +32,13 @@ module Fuzz
 			@matches = []
 			summary = {}
 			
+			# it's okay if the argument can't
+			# be matched against (it might be
+			# a nil, or some other junk). just
+			# return no matches
+			return nil unless\
+				str.respond_to? :match
+			
 			@tokens.each do |token|
 				unless(extracted = token.extract!(str)).nil?
 					summary[token.name] = extracted.value
@@ -78,15 +85,15 @@ module Fuzz
 			@unparsed_str.split(Fuzz::Replacement)
 		end
 		
-		# Returns the value of the parsed token of
-		# the name _token_name_, or nil if no such
+		# Returns the Match object of the parsed token
+		# of the name _token_name_, or nil if no such
 		# token exists. Raises NotParsedYet if no
 		# string has been parsed yet.
 		def [](token_name)
 			raise_unless_parsed
 			@matches.each do |mat|
 				if mat.token.name == token_name
-					return mat.value
+					return mat
 				end
 			end
 			
