@@ -14,7 +14,7 @@ module Fuzz::Token
 		end
 		
 		def humanize(boolean_str)
-			boolean_str == :true ? "Y" : "N"
+			boolean_str == :true ? "yes" : "no"
 		end
 
 		Examples = {
