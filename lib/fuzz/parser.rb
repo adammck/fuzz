@@ -30,7 +30,6 @@ module Fuzz
 
 		def parse(str)
 			@matches = []
-			summary = {}
 			
 			# it's okay if the argument can't
 			# be matched against (it might be
@@ -39,9 +38,9 @@ module Fuzz
 			return nil unless\
 				str.respond_to? :match
 			
+			# build an array of the matched tokens
 			@tokens.each do |token|
 				unless(extracted = token.extract!(str)).nil?
-					summary[token.name] = extracted.value
 					@matches.push(extracted)
 				end
 			end
@@ -51,6 +50,23 @@ module Fuzz
 			# with it (like refer it to a human)
 			@unparsed_str = str
 
+			# return a summary
+			# of the parsed data
+			summary
+		end
+		
+		# Returns a hash containing a key/value
+		# pair for each matched token's name and
+		# normalized value, or raises NotParsedYet
+		# if _parse_ has not been called yet.
+		def summary
+			raise_unless_parsed
+			
+			summary = {}
+			@matches.collect do |mat|
+				summary[mat.token.name] = mat.value
+			end
+			
 			# return nil for no matches, or hash
 			# containing a summary of the matches
 			(summary.length == 0) ? nil : summary
