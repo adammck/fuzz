@@ -5,7 +5,7 @@ module Fuzz::Token
 	class Height < Base
 		# this should be merged with the Length
 		# token, by wrapping and patching the pattern
-		Pattern = '(?:(?:height of|height:?|standing)\s*)?(\d+)(\.\d+)?(?:\s*(?:centimeters?|cm))?(?:\s*(?:tall))?'
+		Pattern = '(?:(?:height of|height:?|standing)\s*)?(\d+)(\.\d*)?(?:\s*(?:centimeters?|cm))?(?:\s*(?:tall))?'
 		
 		# convert captured digits
 		# into a float object

@@ -3,7 +3,7 @@
 
 module Fuzz::Token
 	class Length < Base
-		Pattern = '(\d+)(\.\d+)?(?:\s*(?:centimeters?|cm))?'
+		Pattern = '(\d+)(\.\d*)?(?:\s*(?:centimeters?|cm))?'
 
 		# convert captured digits
 		# into a float object

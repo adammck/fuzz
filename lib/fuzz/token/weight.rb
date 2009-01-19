@@ -5,7 +5,7 @@ module Fuzz::Token
 	class Weight < Base
 		
 		Prefix = '(?:weighing?\s*)?'
-		Meat   = '(\d+)(\.\d+)?'
+		Meat   = '(\d+)(\.\d*)?'
 		Suffix = '(?:\s*(?:kilogram?|kilogrammes?|kg))?'
 		
 		# create one big ugly regex
