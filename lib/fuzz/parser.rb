@@ -30,6 +30,7 @@ module Fuzz
 
 		def parse(str)
 			@matches = []
+			@misses = []
 			
 			# it's okay if the argument can't
 			# be matched against (it might be
@@ -42,6 +43,8 @@ module Fuzz
 			@tokens.each do |token|
 				unless(extracted = token.extract!(str)).nil?
 					@matches.push(extracted)
+				else
+					@misses.push(token)
 				end
 			end
 			
@@ -78,6 +81,14 @@ module Fuzz
 		def matches
 			raise_unless_parsed
 			@matches
+		end
+
+		# Returns an array of the tokens not
+		# matched by the parse, or raises
+		# NotParsedYet if _parse_ has not been called yet.
+		def misses
+			raise_unless_parsed
+			@misses
 		end
 		
 		# Returns an Array containing the parts
